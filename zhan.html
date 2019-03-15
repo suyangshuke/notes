@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script>
+	var equation=["(","{","}",")"];
+	function mate(equation){
+		// var s=new Stack();
+		var s=[];
+		for(var i=0;i<equation.length;i++){
+			switch(equation[i]){
+				case "(":
+					s.push(equation[i]);
+					break;
+				case "{":
+					s.push(equation[i]);
+					break;
+				case "[":
+					s.push(equation[i]);
+					break;
+				case ")":
+					transNum=s.pop();
+					if(transNum!="("){
+						return false;
+					}
+					break;
+				case "}":
+					transNum=s.pop();
+					if(transNum!="{"){
+						return false;
+					}
+					break;
+				case "]":
+					transNum=s.pop();
+					if(transNum!="["){
+						return false;
+					}
+					break;
+			}
+		}
+		if(s.length==0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	console.log(mate(equation));
+</script>
+</body>
+</html>
