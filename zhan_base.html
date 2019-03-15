@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var num=100;
+		//将他转换为二到九进制
+		function numBase(num,base){
+			var s=[];
+			while(num>0){
+				s.push(num%base);
+				num=Math.floor(num/base);
+			};
+			var result='';
+			while(s.length>0){
+				result+=s.pop();
+			}
+			return result;
+		}
+		console.log(numBase(100,8));
+	</script>
+</body>
+</html>
