@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//请把用户输入的不规范的英文名字，变为首字母大写，其他小写的规范名字。输入：['adam', 'LISA', 'barT']，输出：['Adam', 'Lisa', 'Bart']。
+		var arr=['adam','LISA','BarT'];
+			function normalize(arr){
+				function changeCase(arr){
+					var strarr=arr.split("");
+					var str=strarr.map(function(item,index){
+						var str;
+						if(index===0){
+							 str=item.toUpperCase();
+						}else{
+							str=item.toLowerCase();
+						}
+						return str;
+					});
+					return str.join("");
+				}
+				return arr.map(changeCase);		
+			}
+			console.log(normalize(arr));
+	</script>
+</body>
+</html>
