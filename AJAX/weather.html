@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>简单的天气查询</title>
+</head>
+<body>
+	<p>输入查询城市：<input type="text" id="city"></p>
+	<button type="submit" onclick='getWeather()'>查询</button>
+	<p id="weatherInfo"></p>
+	<script>
+		function getWeather(){
+			let url='https://www.apiopen.top/weatherApi?city=';
+			let city=document.getElementById('city');
+			let newUrl=url+city.value;
+			console.log(newUrl);
+			var xhr;
+			if(window.XMLHttpRequest){
+				xhr=new XMLHttpRequest();
+			}else{
+				xhr=new ActiveXOject('Microsoft.XMLHTTP');
+			}
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState===4){
+					if(xhr.status===200){
+						return success(xhr.responseText);
+					}		
+				}
+			}
+			xhr.open('get',newUrl);
+			xhr.send();
+
+			function success(data){
+				let weather=document.getElementById('weatherInfo');
+				let weatherInfo=JSON.parse(data);
+				if(weatherInfo.code==200){
+					weather.innerHTML='查询成功'+'<br>'+'当前城市：'+weatherInfo.data.city+'<br>'+'当前温度：'+weatherInfo.data.wendu+'<br>'+'气温：最'+weatherInfo.data.forecast[0].high+'<br>'+'气温：最'+weatherInfo.data.forecast[0].low+'<br>'+'注意：'+weatherInfo.data.ganmao
+				}else{
+					weather.innerText=weatherInfo.msg;
+				}
+
+			}
+		}
+	</script>
+</body>
+</html>

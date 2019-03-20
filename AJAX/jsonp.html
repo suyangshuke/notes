@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="test-jsonp"></div>
+	<script>
+		//同源：协议、域名、端口号都要一致
+		//1.通过flash插件发送http请求
+		//2.在同源域名下架设一个代理服务器，js负责把请求发送到代理服务器'/proxy?url=http://www.sina.com.cn'
+		//3.jsonp。只能用get方法。利用浏览器允许跨域引用js，利用回调函数
+
+		function getPrice(){
+			var js=document.createElement('script');
+			var head=document.getElementsByTagName('head')[0];
+			js.src='http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice';
+			head.appendChild(js);
+		}
+		getPrice();
+		function refreshPrice(data){
+			var p=document.getElementById('test-jsonp');
+			p.innerHTML='当前价格：'+data['1399001'].name+':'+data['1399001'].price;
+		}
+	</script>
+</body>
+</html>
