@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="./jquery.min.js"></script>
+</head>
+<body>
+	
+</body>
+	<script>
+		//异步计算结果
+		function add(input){
+			return new Promise(function(resolve,reject){
+				console.log('calculating：'+input+'x'+input+'...');
+				setTimeout(resolve,1000,input*input);
+			})
+		}
+		function multiply(input){
+			return new Promise(function(resolve,reject){
+				console.log('calculating：'+input+'+'+input+'...');
+				setTimeout(resolve,1000,input+input);
+			})
+		}
+		var p=new Promise(function(resolve,reject){
+			console.log('start new promise...');
+			resolve(123);			
+		})
+		p.then(multiply)
+		 .then(add)
+		 .then(multiply)
+		 .then(add)
+		 .then(function(result){
+		 	console.log('get value:'+result);
+		 }).catch(function(reason){
+		 	console.log('reason:'+reason);
+		 })
+
+	</script>
+</html>

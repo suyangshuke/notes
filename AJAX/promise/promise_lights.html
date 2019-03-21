@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		//红灯三秒亮一次,绿灯一秒亮一次,黄灯2秒亮一次;如何让三个灯不断交替重复亮灯?(用promise)
+		function colors(color){
+			console.log(color);
+		}
+		function light(timer,cb,color){
+			return new 	Promise(function(resolve,reject){
+				setTimeout(function(){
+					cb(color);
+					resolve();
+				},timer);
+			});
+		};
+		function red(){
+			return light(3000,colors,'red');
+		}
+		function green(){
+			return light(2000,colors,'green');
+		}
+		function yellow(){
+			return light(1000,colors,'yellow');
+		}
+		var step=function(){
+			Promise.resolve().then(red)
+						     .then(green)
+						     .then(yellow)
+						     .then(function(){
+						     	step();
+						     });
+		};
+		step();
+	</script>
+</head>
+<body>
+</body>
+</html>
