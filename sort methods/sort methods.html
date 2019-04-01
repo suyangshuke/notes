@@ -63,6 +63,25 @@
 			return arr;
 		}
 		console.log(insertSort([4,2,1,3]));
+		// 希尔排序
+		// 选择排序的一种优化算法，将间隔为1,拓展为宽~窄
+		function shellSort(arr){
+			var len=arr.length;
+			var gap=1;
+			while(gap<len/3){
+				gap=3*gap+1;
+			}
+			while(gap>=1){
+				for(var i=gap;i<len;i++){
+					for(var j=i;j>=gap && arr[j]<arr[j-gap];j-=gap){
+						swap(arr,j,j-gap);
+					}
+				}
+				gap=(gap-1)/3;
+			}
+			return arr;
+		}
+		console.log(shellSort([68,80,12,80,95,70,79,27,88,93]));
 		//快排
 		//选择第一个元素为基准，比它小的在左边，比他大的在右边。
 		//再分别进行递归。
